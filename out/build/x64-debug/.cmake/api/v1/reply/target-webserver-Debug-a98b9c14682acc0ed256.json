@@ -14,6 +14,7 @@
 		"commands" : 
 		[
 			"add_executable",
+			"target_link_libraries",
 			"target_sources",
 			"enable_segment_heap",
 			"target_scan_and_enable_segment_heap"
@@ -31,7 +32,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 9,
+				"line" : 11,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 12,
 				"parent" : 0
 			},
 			{
@@ -40,22 +47,22 @@
 				"parent" : 0
 			},
 			{
-				"command" : 3,
+				"command" : 4,
 				"file" : 1,
 				"line" : 121,
-				"parent" : 2
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 114,
+				"parent" : 4
 			},
 			{
 				"command" : 2,
 				"file" : 1,
-				"line" : 114,
-				"parent" : 3
-			},
-			{
-				"command" : 1,
-				"file" : 1,
 				"line" : 69,
-				"parent" : 4
+				"parent" : 5
 			}
 		]
 	},
@@ -64,6 +71,13 @@
 		"major" : 2,
 		"minor" : 10
 	},
+	"compileDependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "Server::@b6a24ea752355434019e"
+		}
+	],
 	"compileGroups" : 
 	[
 		{
@@ -71,6 +85,13 @@
 			[
 				{
 					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++latest -MDd"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 2,
+					"path" : "C:/Users/alwon/source/repos/webserver/src/Server/include"
 				}
 			],
 			"language" : "CXX",
@@ -86,6 +107,13 @@
 			[
 				0
 			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "Server::@b6a24ea752355434019e"
 		}
 	],
 	"id" : "webserver::@6890427a1f51a3e7e1df",
@@ -106,12 +134,24 @@
 				"role" : "flags"
 			},
 			{
+				"backtrace" : 2,
+				"fragment" : "src\\Server\\Server.lib",
+				"role" : "libraries"
+			},
+			{
 				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
 				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
+	"linkLibraries" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "Server::@b6a24ea752355434019e"
+		}
+	],
 	"name" : "webserver",
 	"nameOnDisk" : "webserver.exe",
 	"paths" : 
@@ -145,7 +185,7 @@
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 5,
+			"backtrace" : 6,
 			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/include/manifest/segmentheap.manifest",
 			"sourceGroupIndex" : 1
 		}

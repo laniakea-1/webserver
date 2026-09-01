@@ -1,3 +1,6 @@
 C:/Users/alwon/source/repos/webserver/out/build/x64-debug/CMakeFiles/webserver.dir
 C:/Users/alwon/source/repos/webserver/out/build/x64-debug/CMakeFiles/edit_cache.dir
 C:/Users/alwon/source/repos/webserver/out/build/x64-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/alwon/source/repos/webserver/out/build/x64-debug/src/Server/CMakeFiles/Server.dir
+C:/Users/alwon/source/repos/webserver/out/build/x64-debug/src/Server/CMakeFiles/edit_cache.dir
+C:/Users/alwon/source/repos/webserver/out/build/x64-debug/src/Server/CMakeFiles/rebuild_cache.dir

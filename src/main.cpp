@@ -1,6 +1,5 @@
-﻿#include <ws2tcpip.h>
-#include <winsock2.h>
-#include <tchar.h>
+﻿#include "Server/WinSock.hpp"
+#include "Server/Socket.hpp"
 
 #include <iostream>
 #include <string>
@@ -12,18 +11,10 @@
 int main()
 {
 	// Step 1: Load WSA (Windows Sockets API) DLL
-	WSAData wsaData;
-	int wsaerr;
-	WORD wVersionRequested = MAKEWORD(2, 2);
-	wsaerr = WSAStartup(wVersionRequested, &wsaData);
+	Server::WinSock ws(2, 2);
 
-	if (wsaerr != 0) {
-		throw std::runtime_error("WSAStartup failed with error: " + std::to_string(wsaerr));
-	}
-	else {
-		std::println("Winsock DLL found!");
-		std::println("Status: {}", wsaData.szSystemStatus);
-	}
+	// TODO: make socket class
+	Server::Socket listen, accept;
 
 	SOCKET listenSocket = INVALID_SOCKET;
 	SOCKET acceptSocket = INVALID_SOCKET;
@@ -46,7 +37,8 @@ int main()
 		
 		SOCKADDR_IN listenAddr; // sockaddr_in = "Sock Address Internet" (specifically, this is information describing the network address and port that should be associated with the socket)
 		listenAddr.sin_family = AF_INET; // Address family (AF_INET = IPv4)
-		InetPton(listenAddr.sin_family, _T("127.0.0.1"), &listenAddr.sin_addr.s_addr); // InetPton = Internet Presentation to Network (converts IP address); converts IP string to binary form and writes to service
+		//InetPton(listenAddr.sin_family, _T("127.0.0.1"), &listenAddr.sin_addr.s_addr); // InetPton = Internet Presentation to Network (converts IP address); converts IP string to binary form and writes to service
+		listenAddr.sin_addr.s_addr = htonl(INADDR_ANY);
 		listenAddr.sin_port = htons(port);
 
 		if (bind(listenSocket, (SOCKADDR*)&listenAddr, sizeof(listenAddr)) == SOCKET_ERROR) {
@@ -63,44 +55,47 @@ int main()
 		}
 
 		// Step 5: Accept and connect
-		SOCKADDR_IN acceptAddr{};
-		int acceptLen = sizeof(acceptAddr);
-		acceptSocket = accept(listenSocket, (SOCKADDR*)&acceptAddr, &acceptLen);
-		if (acceptSocket == INVALID_SOCKET) {
-			throw std::runtime_error("Failed to accept: " + std::to_string(WSAGetLastError()));
+		while (true) {
+			SOCKADDR_IN acceptAddr{};
+			int acceptLen = sizeof(acceptAddr);
+			acceptSocket = accept(listenSocket, (SOCKADDR*)&acceptAddr, &acceptLen);
+			if (acceptSocket == INVALID_SOCKET) {
+				throw std::runtime_error("Failed to accept: " + std::to_string(WSAGetLastError()));
+			}
+			else {
+				std::println("Accepted connection on port {}", ntohs(acceptAddr.sin_port));
+			}
+
+			char buffer[4096];
+
+			int bytesReceived = recv(acceptSocket, buffer, sizeof(buffer), 0);
+
+			if (bytesReceived == SOCKET_ERROR) {
+				throw std::runtime_error("Failed to receive data: " + std::to_string(WSAGetLastError()));
+			}
+
+			std::println("Received {} bytes:", bytesReceived);
+			std::cout.write(buffer, bytesReceived);
+			std::cout << '\n';
+
+			// Test response from server
+			std::string body = "<!DOCTYPE html><html><head><title>Example</title></head><body><h1>Bri is incredibly sexy and beautiful mwehehe</h1></body></html>";
+			std::ostringstream response;
+			response << "HTTP/1.1 " << 200 << " " << "OK" << "\r\n";
+			response << "Content-Type: " << "text/html" << "\r\n";
+			response << "Content-Length: " << body.size() << "\r\n";
+			response << "Connection: close\r\n\r\n";
+			response << body;
+
+			std::println("Sending response...");
+			send(acceptSocket, response.str().data(), response.str().length(), 0);
 		}
-		else {
-			std::println("Accepted connection on port {}", ntohs(acceptAddr.sin_port));
-		}
-
-		char buffer[4096];
-
-		int bytesReceived = recv(acceptSocket, buffer, sizeof(buffer), 0);
-
-		if (bytesReceived == SOCKET_ERROR) {
-			throw std::runtime_error("Failed to receive data: " + std::to_string(WSAGetLastError()));
-		}
-
-		std::println("Received {} bytes:", bytesReceived);
-		std::cout.write(buffer, bytesReceived);
-		std::cout << '\n';
-
-		// Test response from server
-		std::string body = "<!DOCTYPE html><html><head><title>Example</title></head><body><h1>Bri is incredibly sexy and beautiful mwehehe</h1></body></html>";
-		std::ostringstream response;
-		response << "HTTP/1.1 " << 200 << " " << "OK" << "\r\n";
-		response << "Content-Type: " << "text/html" << "\r\n";
-		response << "Content-Length: " << body.size() << "\r\n";
-		response << "Connection: close\r\n\r\n";
-		response << body;
-		
-		std::println("Sending response...");
-		send(acceptSocket, response.str().data(), response.str().length(), 0);
 	}
 	catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 		std::cout << "Closing socket and unloading DLL..." << std::endl;
 		closesocket(listenSocket);
+		closesocket(acceptSocket);
 		WSACleanup(); // Deregister our app from Winsock, should we have a failure
 		return EXIT_FAILURE;
 	}
@@ -108,3 +103,10 @@ int main()
 	WSACleanup(); // Deregister our app from Winsock
 	return EXIT_SUCCESS;
 }
+
+// int main() {
+	// RAII: Load DLL with WinSock
+	// Create and bind listener socket
+	// Accept incoming connections
+	// 
+// }

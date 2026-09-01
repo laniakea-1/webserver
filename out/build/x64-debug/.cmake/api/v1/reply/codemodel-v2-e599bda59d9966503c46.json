@@ -7,6 +7,10 @@
 			[
 				{
 					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
 					"jsonFile" : "directory-.-Debug-f040eec181a89de70dbe.json",
 					"minimumCMakeVersion" : 
 					{
@@ -14,6 +18,21 @@
 					},
 					"projectIndex" : 0,
 					"source" : ".",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "src/Server",
+					"jsonFile" : "directory-src.Server-Debug-159690b46fee6c0a67d2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.22"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src/Server",
 					"targetIndexes" : 
 					[
 						0
@@ -26,21 +45,30 @@
 				{
 					"directoryIndexes" : 
 					[
-						0
+						0,
+						1
 					],
 					"name" : "webserver",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
 			"targets" : 
 			[
 				{
+					"directoryIndex" : 1,
+					"id" : "Server::@b6a24ea752355434019e",
+					"jsonFile" : "target-Server-Debug-c021e60901a9d8658714.json",
+					"name" : "Server",
+					"projectIndex" : 0
+				},
+				{
 					"directoryIndex" : 0,
 					"id" : "webserver::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-webserver-Debug-d3a6f646480530208037.json",
+					"jsonFile" : "target-webserver-Debug-a98b9c14682acc0ed256.json",
 					"name" : "webserver",
 					"projectIndex" : 0
 				}
