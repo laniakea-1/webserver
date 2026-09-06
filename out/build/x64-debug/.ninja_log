@@ -1,7 +1,7 @@
 # ninja log v7
-5	503	8093261858793054	webserver/CMakeFiles/webserver.dir/webserver.cpp.obj	c53f742da227f7c
-503	689	8093261863770822	webserver/webserver.exe	58d33c81d750bb6
-3	693	8096541223629029	src/CMakeFiles/webserver.dir/main.cpp.obj	f4f19dcf94785df3
-695	813	8096541230550473	src/webserver.exe	15dd5a527b9b3b4f
-34	1099	8098332938087734	CMakeFiles/webserver.dir/src/main.cpp.obj	d688826c1c3b2d9d
-1100	1283	8098332948752466	webserver.exe	70753c55e9642094
+15	2330	8103562671033154	src/Server/CMakeFiles/Server.dir/src/WinSock.cpp.obj	6738764affd3d31f
+15	2397	8103562757319208	CMakeFiles/webserver.dir/src/main.cpp.obj	eec63530df110a41
+25	2356	8103562671133213	src/Server/CMakeFiles/Server.dir/src/Socket.cpp.obj	29851682ea97c948
+2356	2461	8103562694447759	src/Server/Server.lib	b8a247e5b71e9e6a
+2398	2762	8103562781163742	webserver.exe	7637b00d318d13f6
+14	65	8103562669988366	clean	4657a475079c8ec1

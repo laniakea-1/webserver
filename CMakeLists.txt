@@ -5,6 +5,9 @@ project (webserver)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Definitions
+add_definitions(-DSOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+
 # Include sub-projects.
 add_subdirectory(src/Server)
 

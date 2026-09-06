@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/alwon/source/repos/webserver
+# Install script for directory: C:/Users/alwon/Programming/web/webserver
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/alwon/source/repos/webserver/out/install/x64-debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/alwon/Programming/web/webserver/out/install/x64-debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,13 +34,13 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/alwon/source/repos/webserver/out/build/x64-debug/src/Server/cmake_install.cmake")
+  include("C:/Users/alwon/Programming/web/webserver/out/build/x64-debug/src/Server/cmake_install.cmake")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/alwon/source/repos/webserver/out/build/x64-debug/install_local_manifest.txt"
+  file(WRITE "C:/Users/alwon/Programming/web/webserver/out/build/x64-debug/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -56,6 +56,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/alwon/source/repos/webserver/out/build/x64-debug/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/Users/alwon/Programming/web/webserver/out/build/x64-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
